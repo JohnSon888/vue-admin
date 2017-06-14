@@ -1,48 +1,260 @@
-body, div, span, header, footer, nav, section, aside, article, ul, dl, dt, dd, li, a, p, h1, h2, h3, h4,h5, h6, i, b, textarea, button, input, select, figure, figcaption, {
-    padding: 0;
-    margin: 0 auto;
-    list-style: none;
-    font-style: normal;
-    text-decoration: none;
-    border: none;
-    color: #333;
-    font-weight: normal;
-    font-family: "Microsoft Yahei";
-    box-sizing: border-box;
-    -webkit-tap-highlight-color:transparent;
-    -webkit-font-smoothing: antialiased;
-    &:hover{
-        outline: none;
-    }
+@charset "UTF-8";
+/*! normalize.css v3.0.1 | MIT License | git.io/normalize */
+html {
+  font-family: sans-serif;
+  -webkit-text-size-adjust: 100%;
 }
-html,body{
-    height: 100%;
-    width: 100%;
-    background-color: #F5F5F5;
-    margin: 0 auto;
-    padding: 0;
-}
+
 body {
-    color: #415161;
-    font-size: 13px;
-    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;
+  margin: 0;
 }
-input[type="button"], input[type="submit"], input[type="search"], input[type="reset"] {
-    -webkit-appearance: none;
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+  display: block;
 }
-ul,li{
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    height: 100%;
+
+audio,
+canvas,
+progress,
+video {
+  display: inline-block;
+  vertical-align: baseline;
 }
-p{
-    margin: 0;
+
+audio:not([controls]) {
+  display: none;
+  height: 0;
 }
-a{
-    text-decoration: none;
+
+[hidden],
+template {
+  display: none;
 }
-textarea { -webkit-appearance: none;} 
+
+a {
+  background: transparent;
+}
+
+a:active,
+a:hover {
+  outline: 0;
+}
+
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+
+b,
+strong {
+  font-weight: bold;
+}
+
+dfn {
+  font-style: italic;
+}
+
+h1 {
+  margin: 0.67em 0;
+  font-size: 2em;
+}
+
+mark {
+  color: #000;
+  background: #ff0;
+}
+
+small {
+  font-size: 80%;
+}
+
+sub,
+sup {
+  position: relative;
+  font-size: 75%;
+  line-height: 0;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -.5em;
+}
+
+sub {
+  bottom: -.25em;
+}
+
+img {
+  border: 0;
+}
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+figure {
+  margin: 1em 40px;
+}
+
+hr {
+  height: 0;
+  box-sizing: content-box;
+}
+
+pre {
+  overflow: auto;
+}
+
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  margin: 0;
+  color: inherit;
+  font: inherit;
+}
+
+button {
+  overflow: visible;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+
+button[disabled],
+html input[disabled] {
+  cursor: default;
+}
+
+input {
+  line-height: normal;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  padding: 0;
+  box-sizing: border-box;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+input[type="search"] {
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  -webkit-appearance: textfield;
+}
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+fieldset {
+  padding: .35em .625em .75em;
+  margin: 0 2px;
+  border: 1px solid #c0c0c0;
+}
+
+legend {
+  padding: 0;
+  border: 0;
+}
+
+textarea {
+  overflow: auto;
+}
+
+optgroup {
+  font-weight: bold;
+}
+
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+td,
+th {
+  padding: 0;
+}
+
+html {
+  font-size: 100px;
+  width: 100%;
+  height: 100%;
+  background: #f5f5f5;
+}
+
+body {
+  font-size: 13px;
+  font-family: "PingFang SC-Regular", Helvetica, Arial, "Microsoft Yahei", "Hiragino Sans GB", "Heiti SC", "WenQuanYi Micro Hei", sans-serif;
+  line-height: 1.5;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  background-color: #f5f5f5;
+  overflow-x: hidden;
+  -webkit-transition: transform 500ms;
+  transition: transform 500ms;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+p, ul, li, dl, dd, h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+  font-size: inherit;
+}
+
+i, em {
+  font-style: normal;
+}
+
+ul, li {
+  list-style: none;
+}
+
+
 /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/  
 ::-webkit-scrollbar  
 {  
