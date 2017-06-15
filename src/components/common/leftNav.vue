@@ -3,12 +3,12 @@
 	<el-row class="tac">
 	  <el-col>
 	    <el-menu default-active="" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
-	      <el-menu-item index="1"><i class="el-icon-message"></i>订单</el-menu-item>
-	      <el-menu-item index="2"><i class="el-icon-menu"></i>商品</el-menu-item>
-	      <el-menu-item index="3"><i class="el-icon-setting"></i>客户</el-menu-item>
-	      <el-menu-item index="4"><i class="el-icon-setting"></i>资金</el-menu-item>
-	      <el-menu-item index="5"><i class="el-icon-setting"></i>营销</el-menu-item>
-	      <el-menu-item index="6"><i class="el-icon-setting"></i>报表</el-menu-item>
+	      <router-link to="../../page/order"><el-menu-item index="1"><i class="el-icon-message"></i>订单</el-menu-item></router-link> 
+	      <router-link to="../../page/goods"><el-menu-item index="2"><i class="el-icon-menu"></i>商品</el-menu-item></router-link> 
+	      <router-link to="../../page/client"><el-menu-item index="3"><i class="el-icon-setting"></i>客户</el-menu-item></router-link> 
+	      <router-link to="../../page/money"><el-menu-item index="4"><i class="el-icon-setting"></i>资金</el-menu-item></router-link> 
+	      <router-link to="../../page/marketing"><el-menu-item index="5"><i class="el-icon-setting"></i>营销</el-menu-item></router-link> 
+	      <router-link to="../../page/statement"><el-menu-item index="6"><i class="el-icon-setting"></i>报表</el-menu-item></router-link> 
 	    </el-menu>
 	  </el-col>
 	</el-row>
@@ -19,7 +19,8 @@
 	    </el-menu>
 	  </el-col>
 	</el-row>
-	<div class="slide-logo"><a href="#/home"><i class="icon iconfont">易订货</i></a></div>
+	<router-link to="/"><div class="slide-logo"><i class="icon iconfont">易订货</i></div></router-link>
+	<router-view></router-view>
 </div>
 
 </template>

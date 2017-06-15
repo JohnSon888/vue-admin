@@ -3,17 +3,20 @@
 		<div class="container">
 			<topBar></topBar>
 			<leftNav></leftNav>
+			<order></order>
 		</div>
 	</div>
 </template>
 <script>
   import TopBar from '@/components/common/topBar.vue'
   import LeftNav from '@/components/common/leftNav.vue'
+  import Order from '@/page/order/order.vue'
   export default {
   	name:'home',
   	components:{
 		TopBar,
-		LeftNav
+		LeftNav,
+		Order
   	},
   	data(){
   		return{
