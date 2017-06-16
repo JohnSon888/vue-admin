@@ -12,26 +12,27 @@ Vue.use(Router)
 
 export default new Router({
     routes: [{
-        path: '/page',
+        path: '/',
         name: 'Home',
         component: Home,
-    }, {
-        path: '/order',
-        component: Order
-    }, {
-        path: '/page/goods',
-        component: Goods
-    }, {
-        path: '/page/client',
-        component: Client
-    }, {
-        path: '/page/money',
-        component: Money
-    }, {
-        path: '/page/marketing',
-        component: Marketing
-    }, {
-        path: '/page/statement',
-        component: Statement
+        children: [{
+            path: 'page/order',
+            component: Order
+        }, {
+            path: 'page/goods',
+            component: Goods
+        }, {
+            path: 'page/client',
+            component: Client
+        }, {
+            path: 'page/money',
+            component: Money
+        }, {
+            path: 'page/marketing',
+            component: Marketing
+        }, {
+            path: 'page/statement',
+            component: Statement
+        }]
     }]
 })

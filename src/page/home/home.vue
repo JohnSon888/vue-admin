@@ -1,11 +1,15 @@
 <template>
-	<div class="home" name="home">
+	<div class="home-wrap" name="home">
 		<div class="container">
 			<topBar></topBar>
-			<leftNav></leftNav>
-			<div class="right">
-				<router-view></router-view>
-			</div>
+			<el-row class="content-wrap" :gutter="10">
+				<el-col :span="3" class="left-nav">
+					<leftNav></leftNav>
+				</el-col>
+				<el-col :span="21">
+					<router-view></router-view>
+				</el-col>
+			</el-row>
 		</div>
 	</div>
 </template>
@@ -34,13 +38,22 @@
   }
 </script>
 <style type="text/css" scoped>
+	.home-wrap{
+		height: 100%;
+	}
+	.container{
+		height: 100%;
+	}
+	.content-wrap{
+		padding: 10px;
+		height: 100%;	
+	}
 	.left-nav{
-		height: calc(100% - 44px);
-		min-height: 600px;
-		position: relative;
+		height: 100%;
 		background: #fff;
-		width: 12.5%;
-		text-align: center;
+	}
+	.el-col{
+		height: 100%;
 	}
 	.el-menu{
 		background: #fff;

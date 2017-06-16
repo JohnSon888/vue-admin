@@ -1,7 +1,7 @@
 <template>
     <div class="order">
         <div class="content-wrap">
-            <el-row :gutter="10" class="header">
+            <el-row class="header-wrap">
                 <el-col :span="2" class="order-menu">
                     <el-dropdown trigger="click">
                         <span class="el-dropdown-link">
@@ -140,12 +140,12 @@
 <style type="text/css" scoped>
 .order {
     position: relative;
-    background: #e9ecf3;
-    width: 100%;
+    background: #fff;
     height: 100%;
+    padding: 0 20px;
 }
 
-.header {
+.header-wrap {
     background: #fff;
     height: 50px;
     line-height: 50px;

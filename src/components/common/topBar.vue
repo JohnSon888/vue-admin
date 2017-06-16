@@ -24,7 +24,6 @@ export default {
 <style type="text/css" scoped>
 .header-warp {
     width: 100%;
-    height: 44px;
     background-color: #03b8cc;
 }
 
