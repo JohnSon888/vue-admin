@@ -2,11 +2,12 @@
 	<div class="home-wrap" name="home">
 		<div class="container">
 			<topBar></topBar>
-			<el-row class="content-wrap" :gutter="10">
+			<el-row class="content-wrap" :gutter="20">
 				<el-col :span="3" class="left-nav">
 					<leftNav></leftNav>
 				</el-col>
 				<el-col :span="21">
+					<breadCrumb></breadCrumb>
 					<router-view></router-view>
 				</el-col>
 			</el-row>
@@ -16,11 +17,13 @@
 <script>
   import TopBar from '@/components/common/topBar.vue'
   import LeftNav from '@/components/common/leftNav.vue'
+  import BreadCrumb from '@/components/common/breadCrumb.vue'
   export default {
   	name:'home',
   	components:{
 		TopBar,
-		LeftNav
+		LeftNav,
+		BreadCrumb
   	},
   	data(){
   		return{
@@ -45,7 +48,8 @@
 		height: 100%;
 	}
 	.content-wrap{
-		padding: 10px;
+		padding: 20px;
+		padding-top: 10px;
 		height: 100%;	
 	}
 	.left-nav{
