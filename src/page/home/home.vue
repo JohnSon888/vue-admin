@@ -2,7 +2,7 @@
 	<div class="home-wrap" name="home">
 		<div class="container">
 			<topBar></topBar>
-			<el-row class="content-wrap" :gutter="20">
+			<el-row class="content-wrap" type="flex" justify="space-between">
 				<el-col :span="3" class="left-nav">
 					<leftNav></leftNav>
 				</el-col>
@@ -48,13 +48,13 @@
 		height: 100%;
 	}
 	.content-wrap{
-		padding: 20px;
-		padding-top: 10px;
+		padding: 10px;
 		height: 100%;	
 	}
 	.left-nav{
 		height: 100%;
 		background: #fff;
+		margin-right: 10px;
 	}
 	.el-col{
 		height: 100%;

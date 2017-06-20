@@ -4,7 +4,7 @@
             <el-row class="header-wrap">
                 <el-col :span="2" class="order-menu">
                     <el-dropdown trigger="click">
-                        <span class="el-dropdown-link">
+                        <span class="el-dropdown-link" menu-align="start">
                             全部订单<i class="el-icon-caret-bottom el-icon--right"></i>
                         </span>
                         <el-dropdown-menu slot="dropdown">
@@ -17,12 +17,7 @@
                     </el-dropdown>
                 </el-col>
                 <el-col :span="8">
-                    <el-date-picker
-                      v-model="value7"
-                      type="daterange"
-                      align="right"
-                      placeholder="选择日期范围"
-                      :picker-options="pickerOptions2">
+                    <el-date-picker v-model="value7" type="daterange" align="right" placeholder="选择日期范围" :picker-options="pickerOptions2">
                     </el-date-picker>
                 </el-col>
                 <el-col :span="2">
@@ -69,14 +64,7 @@
             </el-row>
             <el-row class="pagination-wrap">
                 <el-col :span="8" :push="16">
-                    <el-pagination
-                      @size-change="handleSizeChange"
-                      @current-change="handleCurrentChange"
-                      :current-page="currentPage4"
-                      :page-sizes="[100,200,300,400]"
-                      :page-size="30"
-                      layout="total, sizes, prev, pager, next, jumper"
-                      :total="7">
+                    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage4" :page-sizes="[100,200,300,400]" :page-size="30" layout="total, sizes, prev, pager, next, jumper" :total="7">
                     </el-pagination>
                 </el-col>
             </el-row>
@@ -90,6 +78,35 @@ export default {
             return {
                 input2: '',
                 currentPage4: 4,
+                pickerOptions2: {
+                    shortcuts: [{
+                        text: '最近一周',
+                        onClick(picker) {
+                            const end = new Date();
+                            const start = new Date();
+                            start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+                            picker.$emit('pick', [start, end]);
+                        }
+                    }, {
+                        text: '最近一个月',
+                        onClick(picker) {
+                            const end = new Date();
+                            const start = new Date();
+                            start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+                            picker.$emit('pick', [start, end]);
+                        }
+                    }, {
+                        text: '最近三个月',
+                        onClick(picker) {
+                            const end = new Date();
+                            const start = new Date();
+                            start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+                            picker.$emit('pick', [start, end]);
+                        }
+                    }]
+                },
+                value6: '',
+                value7: '',
                 orderDatas: [{
                     orderId: 'DH-O-20170614-129361',
                     orderTime: '2017-06-14 23:06',
@@ -154,7 +171,7 @@ export default {
                 return row.address;
             },
             handleIconClick(ev) {
-              console.log(ev);
+                console.log(ev);
             },
             handleSizeChange(val) {
                 console.log(`每页 ${val} 条`);
@@ -163,18 +180,18 @@ export default {
                 console.log(`当前页: ${val}`);
             }
         }
-      //   ,
-      //   created(){
-      //     axios.get('http://corp.dinghuo123.com/v2/order/list?currentPage=1&pageSize=30')
-      //     .then(response=>{
-      //        console.log(response);
-      //        this.orderDatas=response.data.items;
-      //     })
-      //     .catch(error=>{
-      //         console.log(error);
-      //         alert('网络错误，不能访问');
-      //     })
-      // }
+        //   ,
+        //   created(){
+        //     axios.get('http://corp.dinghuo123.com/v2/order/list?currentPage=1&pageSize=30')
+        //     .then(response=>{
+        //        console.log(response);
+        //        this.orderDatas=response.data.items;
+        //     })
+        //     .catch(error=>{
+        //         console.log(error);
+        //         alert('网络错误，不能访问');
+        //     })
+        // }
 }
 </script>
 <style type="text/css" scoped>
@@ -198,7 +215,9 @@ export default {
 .el-dropdown {
     /*height: 150px;*/
 }
-
+.el-dropdown-menu{
+    margin:0;
+}
 .el-button {
     min-width: 86px;
     border-radius: 20px;
@@ -207,8 +226,9 @@ export default {
 .el-button--text {
     color: #93a6b7;
 }
-.pagination-wrap{
+
+.pagination-wrap {
     text-align: right;
-    padding-top:10px;
+    padding-top: 10px;
 }
 </style>

@@ -10,6 +10,10 @@ import Statement from '@/page/statement/statement'
 
 Vue.use(Router)
 
+/**
+ * router 
+ * 1.路由元信息 meta 定义路由的时候可以配置 meta 字段
+ */
 export default new Router({
     routes: [{
         path: '/',
@@ -17,22 +21,28 @@ export default new Router({
         component: Home,
         children: [{
             path: 'page/order',
-            component: Order
+            component: Order,
+            meta: ['订单', '订货单']
         }, {
             path: 'page/goods',
-            component: Goods
+            component: Goods,
+            meta: ['商品', '商品列表']
         }, {
             path: 'page/client',
-            component: Client
+            component: Client,
+            meta: ['客户', '客户列表']
         }, {
             path: 'page/money',
-            component: Money
+            component: Money,
+            meta: ['资金', '收款确认']
         }, {
             path: 'page/marketing',
-            component: Marketing
+            component: Marketing,
+            meta: ['营销', '商品促销']
         }, {
             path: 'page/statement',
-            component: Statement
+            component: Statement,
+            meta: ['报表', '订单统计报表']
         }]
     }]
 })

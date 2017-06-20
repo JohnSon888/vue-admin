@@ -1,0 +1,55 @@
+{
+  "code": 200,
+  "data": {
+    "currentPage": 1,
+    "pageSize": 30,
+    "totalCount": 2,
+    "items": [
+      {
+        "id": 45311193,
+        "customerStatus": "0",
+        "name": "客户1",
+        "userName": "test00101",
+        "realName": "姓名1",
+        "code": "",
+        "area": "",
+        "phone": "",
+        "mobile": "11111111111",
+        "fullAddress": null,
+        "fundAccountList": [],
+        "contactor": "姓名1",
+        "userStatus": "0",
+        "email": "",
+        "createTime": "2017-04-25 16:01:15",
+        "invoiceAddress": "",
+        "invoiceMobile": "",
+        "totalBalance": 0,
+        "customerTypeId": 1686820,
+        "customerTypeName": "普通"
+      },
+      {
+        "id": 48034848,
+        "customerStatus": "0",
+        "name": "rrewrew",
+        "userName": "test00102",
+        "realName": "rdewrew",
+        "code": "",
+        "area": "",
+        "phone": "",
+        "mobile": "13355555555",
+        "fullAddress": null,
+        "fundAccountList": [],
+        "contactor": "rdewrew",
+        "userStatus": "0",
+        "email": "",
+        "createTime": "2017-05-28 01:01:35",
+        "invoiceAddress": "",
+        "invoiceMobile": "",
+        "totalBalance": 0,
+        "customerTypeId": 1686820,
+        "customerTypeName": "普通"
+      }
+    ]
+  },
+  "message": "操作成功"
+}

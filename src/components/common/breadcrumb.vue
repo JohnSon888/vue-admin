@@ -1,11 +1,10 @@
 <template>
     <div class="breadcrumb-wrap">
         <el-row type="flex" justify="space-between">
-            <el-col :span="4">
+            <el-col :span="8">
                 <el-breadcrumb separator="/">
                     <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                    <el-breadcrumb-item>订单</el-breadcrumb-item>
-                    <el-breadcrumb-item>订货号</el-breadcrumb-item>
+                    <el-breadcrumb-item v-for="(item, index) in $route.meta" key="index">{{item}}</el-breadcrumb-item>
                 </el-breadcrumb>
             </el-col>
             <el-col :span="4" class="right-crumb">

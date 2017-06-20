@@ -1,8 +1,8 @@
 <template>
     <div class="left-menu-wrap">
-        <el-menu default-active="1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
+        <el-menu default-active="activeIndex" class="el-menu-vertical-demo"  @select="handleSelect">
             <router-link to="../../page/order">
-                <el-menu-item index="1"><i class="el-icon-message"></i>订单</el-menu-item>
+                <el-menu-item index="1" ><i class="el-icon-message"></i>订单</el-menu-item>
             </router-link>
             <router-link to="../../page/goods">
                 <el-menu-item index="2"><i class="el-icon-menu"></i>商品</el-menu-item>
@@ -21,7 +21,7 @@
             </router-link>
             <template>
                 <div class="app-center">
-                    <el-menu default-active="" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
+                    <el-menu default-active="" class="el-menu-vertical-demo">
                         <el-menu-item index="7"><i class="el-icon-message"></i>应用中心</el-menu-item>
                     </el-menu>
                 </div>
@@ -36,12 +36,11 @@
 </template>
 <script>
 export default {
+    activeIndex:'1',
+    props: ['choosed'],
     methods: {
-        handleOpen(key, keyPath) {
-            console.log(key, keyPath);
-        },
-        handleClose(key, keyPath) {
-            console.log(key, keyPath);
+        handleSelect(key, keyPath) {
+            console.log(this.$route.path);
         }
     }
 }
@@ -50,16 +49,18 @@ export default {
 .left-menu-wrap{
 	background: #fff;
 	height: 100%;
+    padding: 10px 0;
 }
 .el-menu {
     background: #fff;
     position: relative;
+    height: 100%;
 }
 
 .el-menu-item {
     text-align: center;
-    height: 50px;
-    line-height: 50px;
+    height: 44px;
+    line-height: 44px;
     font-size: 16px;
 }
 
@@ -80,10 +81,19 @@ export default {
     left: 50%;
     margin-left: -35px;
     overflow: hidden;
+
 }
 
 .slide-logo .icon {
     font-size: 20px;
     color: #03b8cc;
+}
+.el-menu-item:hover{
+  color: #fff;
+  background-color: #03b8cc;  
+}
+.el-menu-item.is-active{
+  color: #fff;
+  background-color: #03b8cc;
 }
 </style>

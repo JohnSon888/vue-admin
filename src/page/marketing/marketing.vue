@@ -3,7 +3,7 @@
         <div class="content-wrap">
             <el-row class="header-wrap">
                 <el-col :span="2" class="order-menu">
-                    <el-dropdown trigger="click">
+                    <el-dropdown trigger="click" menu-align="start">
                         <span class="el-dropdown-link">
                             全部状态<i class="el-icon-caret-bottom el-icon--right"></i>
                         </span>
@@ -192,6 +192,9 @@ export default {
 
 .el-dropdown {
     /*height: 150px;*/
+}
+.el-dropdown-menu{
+    margin:0;
 }
 
 .el-button {

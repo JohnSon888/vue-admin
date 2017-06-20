@@ -1,0 +1,80 @@
+{
+  "code": 200,
+  "data": {
+    "currentPage": 1,
+    "pageSize": 30,
+    "totalCount": 1,
+    "items": [
+      {
+        "id": 929747,
+        "startTime": "2017-06-13 00:00:00",
+        "endTime": "2017-07-13 00:00:00",
+        "name": "",
+        "status": "0",
+        "showStatus": "促销中",
+        "showStatusCode": 2,
+        "method": "1",
+        "type": "1",
+        "customerTypeId": 0,
+        "countryId": 900000,
+        "countryName": "其他区域",
+        "provinceName": "",
+        "cityName": "",
+        "districtName": "",
+        "customerType": {},
+        "provinceId": 0,
+        "cityId": 0,
+        "districtId": 0,
+        "isMulti": "0",
+        "promotionBy": 0,
+        "totalBenefitsAmount": 0,
+        "promotionInfo": {
+          "minusMoney": 0,
+          "meetMoney": 0,
+          "meetCount": 100,
+          "promotionMoney": 0,
+          "promotionDiscount": 0,
+          "gifts": [
+            {
+              "count": 2,
+              "product": {
+                "id": 172711549,
+                "name": "3213-1",
+                "code": "P8511834513",
+                "customAttributeStitch": "P8511834513",
+                "marketPrice": 321,
+                "costPrice": 1,
+                "inventoryCount": -851,
+                "prepareCount": 0,
+                "barcode": "3213",
+                "imgUrl_60": "",
+                "imgUrl_200": "",
+                "imgUrl_480": "",
+                "productUnitName": "件",
+                "spec": "规格1：321"
+              }
+            }
+          ]
+        },
+        "promotionProduct": {
+          "id": 172711549,
+          "name": "3213-1",
+          "code": "P8511834513",
+          "customAttributeStitch": "P8511834513",
+          "marketPrice": 321,
+          "costPrice": 1,
+          "inventoryCount": -851,
+          "prepareCount": 0,
+          "barcode": "3213",
+          "imgUrl_60": "",
+          "imgUrl_200": "",
+          "imgUrl_480": "",
+          "productUnitName": "件",
+          "spec": "规格1：321"
+        },
+        "productCount": 0
+      }
+    ]
+  },
+  "message": "操作成功"
+}

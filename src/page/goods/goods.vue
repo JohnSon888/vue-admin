@@ -3,7 +3,7 @@
         <div class="content-wrap">
             <el-row class="header-wrap">
                 <el-col :span="2" class="order-menu">
-                    <el-dropdown trigger="click">
+                    <el-dropdown trigger="click" menu-align="start">
                         <span class="el-dropdown-link">
                             全部分类<i class="el-icon-caret-bottom el-icon--right"></i>
                         </span>
@@ -17,7 +17,7 @@
                     </el-dropdown>
                 </el-col>
                 <el-col :span="2" class="order-menu">
-                    <el-dropdown trigger="click">
+                    <el-dropdown trigger="click" menu-align="start">
                         <span class="el-dropdown-link">
                             全部状态<i class="el-icon-caret-bottom el-icon--right"></i>
                         </span>
@@ -38,38 +38,39 @@
                 <el-col :span="6" :offset="4">
                     <el-button :plain="true" type="success">导出</el-button>
                     <el-button :plain="true" type="success">导入</el-button>
-                    <el-button :plain="true" type="warning">新增</el-button>
+                    <el-button class="add">新增</el-button>
                 </el-col>
             </el-row>
             <el-row class="tbody-wrap">
-                <el-table ref="multipleTable" :data="orderDatas" border tooltip-effect="dark" style="width:100%" height='400'>
+                <el-table ref="multipleTable" :data="tableDatas" border tooltip-effect="dark" style="width:100%" height='400'>
                     <el-table-column type="selection" width="55">
                     </el-table-column>
-                    <el-table-column prop="orderId" label="订单号" width="200">
+                    <el-table-column prop="imgSrc" label="商品图片" width="100">
+                        <template scope="scope">
+                            <img :src="scope.row.mainImg.imgUrl_60">
+                        </template>
                     </el-table-column>
-                    <el-table-column prop="orderTime" label="下单时间" width="150" sortable>
+                    <el-table-column prop="code" label="商品编码" width="160" sortable>
                     </el-table-column>
-                    <el-table-column prop="customerName" label="客户名称" width="120" sortable>
+                    <el-table-column prop="name" label="商品名称" width="280" sortable>
                     </el-table-column>
-                    <el-table-column prop="money" label="金额" width="120">
+                    <el-table-column prop="spec" label="商品规格" width="240">
                     </el-table-column>
-                    <el-table-column prop="deliveroods" label="出库/发货" width="120">
+                    <el-table-column prop="productUnitName" label="单位" width="80">
                     </el-table-column>
-                    <el-table-column prop="status" label="状态" width="120" sortable>
+                    <el-table-column prop="marketPrice" label="市场价" width="120" sortable>
                     </el-table-column>
-                    <el-table-column prop="paymentStatus" label="付款状态" width="120" row-class-name="ssss">
+                    <el-table-column prop="costPrice" label="参考成本价" width="120">
                     </el-table-column>
-                    <el-table-column prop="remark" label="备注" width="120">
+                    <el-table-column prop="productBrandName" label="品牌" width="120">
                     </el-table-column>
-                    <el-table-column prop="billType" label="发票类型" width="120">
+                    <el-table-column prop="inventoryCount" label="库存数量" width="120">
                     </el-table-column>
-                    <el-table-column prop="deliveryDate" label="交货日期" width="150">
+                    <el-table-column prop="prepareCount" label="预购" width="150">
                     </el-table-column>
-                    <el-table-column prop="consignee" label="收货人" width="120">
+                    <el-table-column prop="prepareCount" label="库存成本" width="120">
                     </el-table-column>
-                    <el-table-column prop="contact" label="联系方式" width="130">
-                    </el-table-column>
-                    <el-table-column prop="address" label="收货地址" width="240">
+                    <el-table-column prop="status" label="状态" width="130">
                     </el-table-column>
                     <el-table-column prop="operate" label="操作" width="50" fixed="right">
                     </el-table-column>
@@ -77,14 +78,7 @@
             </el-row>
             <el-row class="pagination-wrap">
                 <el-col :span="8" :push="16">
-                    <el-pagination
-                      @size-change="handleSizeChange"
-                      @current-change="handleCurrentChange"
-                      :current-page="currentPage4"
-                      :page-sizes="[100,200,300,400]"
-                      :page-size="30"
-                      layout="total, sizes, prev, pager, next, jumper"
-                      :total="7">
+                    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[5,10,20,30]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="totalCount">
                     </el-pagination>
                 </el-col>
             </el-row>
@@ -97,64 +91,10 @@ export default {
     data() {
             return {
                 input2: '',
-                currentPage4: 4,
-                orderDatas: [{
-                    orderId: 'DH-O-20170614-129361',
-                    orderTime: '2017-06-14 23:06',
-                    customerName: 'rrewrew',
-                    money: '3321.00',
-                    deliveroods: '备货中/待发货',
-                    status: '待出库审核',
-                    paymentStatus: '未付款',
-                    remark: '是一个测试',
-                    billType: '增值税发票',
-                    deliveryDate: '2017-06-18 00:00',
-                    consignee: 'rdewrew',
-                    contact: '13355555555',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    orderId: 'DH-O-20170614-129361',
-                    orderTime: '2017-02-14 23:06',
-                    customerName: 'rrewrew',
-                    money: '332.00',
-                    deliveroods: '备货中/待发货',
-                    status: '待出库审核',
-                    paymentStatus: '未付款',
-                    remark: '是一个测试',
-                    billType: '增值税发票',
-                    deliveryDate: '2017-06-18 00:00',
-                    consignee: 'rdewrew',
-                    contact: '13355555555',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    orderId: 'DH-O-20170614-129361',
-                    orderTime: '2017-03-14 23:06',
-                    customerName: 'rrewrew',
-                    money: '31.00',
-                    deliveroods: '备货中/待发货',
-                    status: '待出库审核',
-                    paymentStatus: '未付款',
-                    remark: '是一个测试',
-                    billType: '增值税发票',
-                    deliveryDate: '2017-06-18 00:00',
-                    consignee: 'rdewrew',
-                    contact: '13355555555',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }, {
-                    orderId: 'DH-O-20170614-129361',
-                    orderTime: '2017-04-14 23:06',
-                    customerName: 'rrewrew',
-                    money: '3313.00',
-                    deliveroods: '备货中/待发货',
-                    status: '待出库审核',
-                    paymentStatus: '未付款',
-                    remark: '是一个测试',
-                    billType: '增值税发票',
-                    deliveryDate: '2017-06-18 00:00',
-                    consignee: 'rdewrew',
-                    contact: '13355555555',
-                    address: '上海市普陀区金沙江路 1518 弄'
-                }]
+                currentPage: 0,
+                pageSize:0,
+                totalCount:0,
+                tableDatas: []
             }
         },
         methods: {
@@ -162,7 +102,7 @@ export default {
                 return row.address;
             },
             handleIconClick(ev) {
-              console.log(ev);
+                console.log(ev);
             },
             handleSizeChange(val) {
                 console.log(`每页 ${val} 条`);
@@ -170,19 +110,30 @@ export default {
             handleCurrentChange(val) {
                 console.log(`当前页: ${val}`);
             }
+        },
+        created() {
+            axios.get('/static/jsonList/goodsList.json').then(response => {
+                    const responseData = response.data.data;
+                    // 列表数据渲染
+                    this.tableDatas = responseData.items;
+                    this.tableDatas.forEach(item => {
+                            if (item.status == '0') {
+                                item.status = "上架";
+                            } else {
+                                item.status = "下架";
+                            }
+                        })
+                        // 分页数据渲染
+                    this.currentPage = responseData.currentPage;
+                    this.pageSize = responseData.pageSize;
+                    this.totalCount = responseData.totalCount;
+
+                })
+                .catch(error => {
+                    console.log(error);
+                    alert('网络错误，不能访问');
+                })
         }
-      //   ,
-      //   created(){
-      //     axios.get('http://corp.dinghuo123.com/v2/order/list?currentPage=1&pageSize=30')
-      //     .then(response=>{
-      //        console.log(response);
-      //        this.orderDatas=response.data.items;
-      //     })
-      //     .catch(error=>{
-      //         console.log(error);
-      //         alert('网络错误，不能访问');
-      //     })
-      // }
 }
 </script>
 <style type="text/css" scoped>
@@ -207,6 +158,10 @@ export default {
     /*height: 150px;*/
 }
 
+.el-dropdown-menu {
+    margin: 0;
+}
+
 .el-button {
     min-width: 86px;
     border-radius: 20px;
@@ -215,8 +170,18 @@ export default {
 .el-button--text {
     color: #93a6b7;
 }
-.pagination-wrap{
+.add{
+    color: #fff;
+    background: #13c19f;
+}
+.pagination-wrap {
     text-align: right;
-    padding-top:10px;
+    padding-top: 10px;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
 }
 </style>
