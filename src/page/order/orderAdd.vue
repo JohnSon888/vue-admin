@@ -8,7 +8,7 @@
                             {{dropdownText}}<i class="el-icon-caret-bottom el-icon--right"></i>
                         </span>
                         <el-dropdown-menu slot="dropdown">
-                            <el-dropdown-item command="全部订单">全部订单</el-dropdown-item>
+                            <el-dropdown-item command="全部订单">全部订单11111</el-dropdown-item>
                             <el-dropdown-item command="待处理订单">待处理订单</el-dropdown-item>
                             <el-dropdown-item command="未完成订单">未完成订单</el-dropdown-item>
                             <el-dropdown-item command="已完成订单">已完成订单</el-dropdown-item>
@@ -25,7 +25,7 @@
                 </el-col>
                 <el-col :span="5" :offset="6">
                     <el-button :plain="true" type="success">导入</el-button>
-                    <router-link to="/order"><el-button :plain="true" type="success">新增</el-button></router-link>
+                    <!-- <router-link to="../../page/order/orderAdd"><el-button :plain="true" type="success">新增</el-button></router-link> -->
                 </el-col>
             </el-row>
             <el-row class="header-wrap" v-show="searchResult">
@@ -193,7 +193,7 @@ export default {
                 totalCount: 0,
                 invoiceType: '',
                 payStatus: '',
-                dropdownText: '全部订单',
+                dropdownText: '全部订单1111',
                 url: '',
                 checkAll: false,
                 checkedCities: [],

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/page/home/home'
 import Order from '@/page/order/order'
+import OrderAdd from '@/page/order/orderAdd'
 import Goods from '@/page/goods/goods'
 import Client from '@/page/client/client'
 import Money from '@/page/money/money'
@@ -23,6 +24,10 @@ export default new Router({
             path: 'page/order',
             component: Order,
             meta: ['订单', '订货单']
+        },{
+            path: '/order',
+            component: OrderAdd,
+            meta: ['订单', '订货单','新增订货单']
         }, {
             path: 'page/goods',
             component: Goods,
