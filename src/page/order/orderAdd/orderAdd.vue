@@ -2,95 +2,39 @@
     <div class="order">
         <div class="content-wrap">
             <el-row class="header-wrap" v-show="search">
-                <el-col :span="3" class="order-menu">
-                    <el-dropdown trigger="click" menu-align="start" @command="handleCommand">
-                        <span class="el-dropdown-link">
-                            {{dropdownText}}<i class="el-icon-caret-bottom el-icon--right"></i>
-                        </span>
-                        <el-dropdown-menu slot="dropdown">
-                            <el-dropdown-item command="全部订单">全部订单</el-dropdown-item>
-                            <el-dropdown-item command="待处理订单">待处理订单</el-dropdown-item>
-                            <el-dropdown-item command="未完成订单">未完成订单</el-dropdown-item>
-                            <el-dropdown-item command="已完成订单">已完成订单</el-dropdown-item>
-                            <el-dropdown-item command="已作废订单">已作废订单</el-dropdown-item>
-                        </el-dropdown-menu>
-                    </el-dropdown>
-                </el-col>
                 <el-col :span="8">
-                    <el-input placeholder="请输入订单号/客户名称" icon="search" v-model="input2" :on-icon-click="handleIconClick">
+                    <el-input placeholder="输入名称/编码/联系人/手机" icon="search" v-model="input2" :on-icon-click="handleIconClick">
                     </el-input>
-                </el-col>
-                <el-col :span="2">
-                    <el-button type="text" @click="advanceFormVisible">高级搜索</el-button>
-                </el-col>
-                <el-col :span="5" :offset="6">
-                    <el-button :plain="true" type="success">导入</el-button>
-                    <router-link to="order/orderAdd"><el-button :plain="true" type="success">新增</el-button></router-link>
-                </el-col>
-            </el-row>
-            <el-row class="header-wrap" v-show="searchResult">
-                <el-col :span="8">
-                    <el-button type="text" @click="handleSearchResult">搜索结果</el-button>
-                    <el-button type="text" @click="handleSearchClear">清除搜索</el-button>
-                    <el-button type="text" @click="handleSearchContinue">继续搜索</el-button>
                 </el-col>
             </el-row>
             <el-row class="tbody-wrap">
-                <el-table ref="multipleTable" :data="orderDatas" border tooltip-effect="dark" style="width:100%" height='400'>
-                    <el-table-column type="selection" width="55">
-                    </el-table-column>
-                    <el-table-column prop="orderNum" label="订单号" width="240">
+                <el-table ref="multipleTable" :data="orderDatas" border tooltip-effect="dark" style="width:100%" height='123' show-summary>
+                    <el-table-column prop="orderNum" label="序号" width="80">
                         <template scope="scope">
-                            <span class="orderId">{{scope.row.orderNum}}</span>
-                            <el-tag close-transition class="spec-tag" v-if="scope.row.isDiscountOrder == '1'">特价</el-tag>
+                            <span class="orderId">1</span>
                         </template>
                     </el-table-column>
-                    <el-table-column prop="createTime" label="下单时间" width="180" sortable>
+                    <el-table-column prop="createTime" label="主图" width="140">
                     </el-table-column>
-                    <el-table-column prop="customerName" label="客户名称" width="120" sortable>
+                    <el-table-column prop="customerName" label="商品编码" width="140">
                     </el-table-column>
-                    <el-table-column prop="actualMoney" label="金额" width="100">
+                    <el-table-column prop="actualMoney" label="商品名称" width="160">
                     </el-table-column>
-                    <el-table-column prop="" label="出库/发货" width="150">
-                        <template scope="scope">
-                            <span>{{scope.row.outStorageStatusName}}/{{scope.row.deliverStatusName}}</span>
-                            <p v-if="scope.row.deliverStatusName == '已发货'" class="deliverStatus">物流信息</p>
-                        </template>
+                    <el-table-column prop="freight" label="规格" width="120">
                     </el-table-column>
-                    <el-table-column prop="dispalyStatus" label="状态" width="120" sortable>
-                        <template scope="scope">
-                            <span v-bind:class="[scope.row.dispalyStatus == '已完成' ? '' : 'dispalyActive']">{{scope.row.dispalyStatus}}</span>
-                        </template>
+                    <el-table-column prop="dispalyStatus" label="数量" width="120">
                     </el-table-column>
-                    <el-table-column prop="payStatus" label="付款状态" width="120">
-                        <template scope="scope">
-                            <span>{{scope.row.payStatus}}</span>
-                        </template>
+                    <el-table-column prop="payStatus" label="单位" width="120">
                     </el-table-column>
-                    <el-table-column prop="remark" label="备注" width="120">
+                    <el-table-column prop="remark" label="单价" width="120">
                     </el-table-column>
-                    <el-table-column prop="billType" label="发票类型" width="120">
-                        <template scope="scope">
-                            <span>{{scope.row.invoiceType}}</span>
-                        </template>
+                    <el-table-column prop="billType" label="小计" width="120">
                     </el-table-column>
-                    <el-table-column prop="deliveryDate" label="交货日期" width="180">
+                    <el-table-column prop="deliveryDate" label="重量" width="200">
                     </el-table-column>
-                    <el-table-column prop="contact" label="收货人" width="120">
-                    </el-table-column>
-                    <el-table-column prop="mobile" label="联系方式" width="130">
-                    </el-table-column>
-                    <el-table-column prop="fulladdress" label="收货地址" width="240">
-                    </el-table-column>
-                    <el-table-column prop="operate" label="操作" width="50" fixed="right">
+                    <el-table-column prop="contact" label="备注" width="240">
                     </el-table-column>
                 </el-table>
-            </el-row>
-            <el-row class="pagination-wrap">
-                <el-col :span="8" :push="16">
-                    <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage" :page-sizes="[10,30,50]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="totalCount">
-                    </el-pagination>
-                </el-col>
             </el-row>
         </div>
         <el-dialog title="高级搜索" :visible.sync="dialogTableVisible" size="big" class="advanceForm-dialog">
@@ -147,7 +91,7 @@
                 </el-row>
                 <el-form-item label="订单状态" prop="checkedCities">
                     <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
-                    <el-checkbox-group v-model="form.checkedCities" @change="handleCheckedCitiesChange"  style="display:inline-block;margin-left: 10px;">
+                    <el-checkbox-group v-model="form.checkedCities" @change="handleCheckedCitiesChange" style="display:inline-block;margin-left: 10px;">
                         <el-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox>
                     </el-checkbox-group>
                 </el-form-item>
@@ -193,13 +137,13 @@ export default {
                 totalCount: 0,
                 invoiceType: '',
                 payStatus: '',
-                dropdownText: '全部订单',
+                dropdownText: '全部订单1111',
                 url: '',
                 checkAll: false,
                 checkedCities: [],
-                cities: ['待订单审核', '待财务审核', '待出库审核','待发货确认','待收货确认','已完成','已作废'],
+                cities: ['待订单审核', '待财务审核', '待出库审核', '待发货确认', '待收货确认', '已完成', '已作废'],
                 isIndeterminate: false,
-                search:true,
+                search: true,
                 searchResult: false,
                 form: {
                     orderId: '',
@@ -209,7 +153,7 @@ export default {
                     deliveryInfo: '',
                     affiliationSection: '',
                     goodsInfo: '',
-                    checkedCities:[],
+                    checkedCities: [],
                     payStatus: [],
                     orderTags: ''
                 },
@@ -267,7 +211,20 @@ export default {
                         trigger: 'change'
                     }]
                 },
-                orderDatas: []
+                orderDatas: [{
+                    "orderNum": "",
+                    "createTime": "",
+                    "expireTime": "",
+                    "productTypeCount": '',
+                    "freight": '',
+                    "weight": '',
+                    "customerName": "",
+                    "contact": "",
+                    "outStorageStatusName": "",
+                    "deliverStatusName": "",
+                    "displayStatus": "",
+                    "actualMoney":""
+                }]
             }
         },
         methods: {
@@ -294,15 +251,15 @@ export default {
                 // this.offset = (val - 1)*this.limit;
                 // this.getResturants()
             },
-            handleSearchResult(){
+            handleSearchResult() {
 
             },
-            handleSearchContinue(){
+            handleSearchContinue() {
                 this.search = true;
                 this.searchResult = false;
                 this.dialogTableVisible = true;
             },
-            handleSearchClear(){
+            handleSearchClear() {
                 this.search = true;
                 this.searchResult = false;
                 this.dialogTableVisible = false;
@@ -353,7 +310,7 @@ export default {
                 axios.get(url).then(response => {
                         const responseData = response.data.data;
                         // 列表数据渲染
-                        this.orderDatas = responseData.items;
+                        // this.orderDatas = responseData.items;
                         this.orderDatas.forEach(item => {
                                 if (item.invoiceType == '2') {
                                     item.invoiceType = "增值税发票";
