@@ -1,24 +1,11 @@
-<template>
+<template>   
     <div class="left-menu-wrap">
         <el-menu default-active="activeIndex" class="el-menu-vertical-demo"  @select="handleSelect">
-            <router-link to="../../page/order">
-                <el-menu-item index="1" ><i class="el-icon-message"></i>订单</el-menu-item>
-            </router-link>
-            <router-link to="../../page/goods">
-                <el-menu-item index="2"><i class="el-icon-menu"></i>商品</el-menu-item>
-            </router-link>
-            <router-link to="../../page/client">
-                <el-menu-item index="3"><i class="el-icon-setting"></i>客户</el-menu-item>
-            </router-link>
-            <router-link to="../../page/money">
-                <el-menu-item index="4"><i class="el-icon-setting"></i>资金</el-menu-item>
-            </router-link>
-            <router-link to="../../page/marketing">
-                <el-menu-item index="5"><i class="el-icon-setting"></i>营销</el-menu-item>
-            </router-link>
-            <router-link to="../../page/statement">
-                <el-menu-item index="6"><i class="el-icon-setting"></i>报表</el-menu-item>
-            </router-link>
+        <router-link v-for="(item,index) in dataList" :to="item.path">
+            <el-menu-item @mouseenter.native="mouseen(index)" @mouseleave.native='mouseou(index)'  :index="comp(index+1)" ><i :class="item.icon"></i>{{item.value}}
+            <showBox :index="index" :flag="flagList[index]"></showBox>
+            </el-menu-item> 
+        </router-link>
             <template>
                 <div class="app-center">
                     <el-menu default-active="" class="el-menu-vertical-demo">
@@ -35,17 +22,76 @@
     </div>
 </template>
 <script>
+import showBox from '../navListHover/showbox'
 export default {
+    data(){
+        return {
+            dataList:[
+               {
+                path:'../../page/order',
+                icon:'el-icon-message',
+                value:'订单'
+               },
+               {
+                path:'../../page/goods',
+                icon:'el-icon-menu',
+                value:'商品'
+               },
+               {
+                path:'../../page/client',
+                icon:'el-icon-setting',
+                value:'客户'
+               },
+               {
+                path:'../../page/money',
+                icon:'el-icon-setting',
+                value:'资金'
+               },
+               {
+                path:'../../page/marketing',
+                icon:'el-icon-setting',
+                value:'营销'
+               },
+               {
+                path:'../../page/statement',
+                icon:'el-icon-setting',
+                value:'报表'
+               }
+            ],
+            flagList:{}
+        }
+    },
     activeIndex:'1',
     props: ['choosed'],
+    components:{
+        showBox
+    },
     methods: {
         handleSelect(key, keyPath) {
             console.log(this.$route.path);
+        },
+        mouseen(arg){
+            // vue不建议这种直接改变子组件属性的操作，下次注意修改
+            // this.$refs['page'+arg][0]._props.flag = true
+            this.$set(this.flagList,arg,true)
+        },
+        mouseou(arg){
+            this.flagList[arg] = 0
+        },
+        comp:function(e){
+            return e.toString();
         }
+        
+        
+    },
+    computed:{
     }
 }
 </script>
 <style type="text/css" scoped>
+.showhover {
+        display:none;
+    }
 .left-menu-wrap{
 	background: #fff;
 	height: 100%;

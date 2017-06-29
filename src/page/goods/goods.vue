@@ -47,7 +47,7 @@
                     </el-table-column>
                     <el-table-column prop="imgSrc" label="商品图片" width="100">
                         <template scope="scope">
-                            <img :src="scope.row.mainImg.imgUrl_60">
+                            <img :src="filtersrc(scope.row.mainImg.imgUrl_60)">
                         </template>
                     </el-table-column>
                     <el-table-column prop="code" label="商品编码" width="160" sortable>
@@ -94,7 +94,11 @@ export default {
                 currentPage: 0,
                 pageSize:0,
                 totalCount:0,
-                tableDatas: []
+                tableDatas: [],
+                tableDatasall:[],
+                page:1,
+                pageDatas:[],
+                num : 0
             }
         },
         methods: {
@@ -105,17 +109,33 @@ export default {
                 console.log(ev);
             },
             handleSizeChange(val) {
-                console.log(`每页 ${val} 条`);
+                var len = Math.ceil(this.tableDatasall.length/val);
+                this.pageDatas = []
+                for(var i=0;i<len;i++){
+                    var arr = this.tableDatasall.slice(i*val,(i+1)*val)
+                    this.pageDatas.push(arr)
+                }
+                this.currentPage = this.page
+                this.pageSize = val;
+                this.tableDatas = this.pageDatas[this.page-1];
             },
             handleCurrentChange(val) {
-                console.log(`当前页: ${val}`);
+                this.num++;
+                if(this.num>1){
+                    this.tableDatas = this.pageDatas[val-1];
+                    this.page = val;
+                }
+            },
+            filtersrc(arg){
+                if(arg) return 'https://oss.dinghuo123.com/images/productImage/'+arg.slice(0,arg.indexOf('@'))
             }
         },
         created() {
             axios.get('/static/jsonList/goodsList.json').then(response => {
                     const responseData = response.data.data;
                     // 列表数据渲染
-                    this.tableDatas = responseData.items;
+                    this.tableDatasall = responseData.items;
+                    this.tableDatas = this.tableDatasall;
                     this.tableDatas.forEach(item => {
                             if (item.status == '0') {
                                 item.status = "上架";
@@ -137,6 +157,10 @@ export default {
 }
 </script>
 <style type="text/css" scoped>
+.bigpic.fade-enter-active, .bigpic.fade-leave-active
+  {transition: all 1s ease; }    
+.bigpic.fade-enter, .bigpic.fade-leave-active
+  {opacity: 0;}
 .goods-wrap {
     position: relative;
     background: #fff;
@@ -184,4 +208,6 @@ img {
     height: 100%;
     vertical-align: middle;
 }
+.bigpic {position: fixed;top:300px;left:200px; background: #f00;width:200px;height:200px;}
+
 </style>
