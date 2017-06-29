@@ -24,8 +24,10 @@
                     <el-button type="text" @click="advanceFormVisible">高级搜索</el-button>
                 </el-col>
                 <el-col :span="5" :offset="6">
-                    <el-button :plain="true" type="success">导入</el-button>
-                    <router-link to="order/orderAdd"><el-button :plain="true" type="success">新增</el-button></router-link>
+                    <el-button :plain="true" type="success" @click="export2Excel">导出</el-button>
+                    <router-link to="order/orderAdd">
+                        <el-button :plain="true" type="success">新增</el-button>
+                    </router-link>
                 </el-col>
             </el-row>
             <el-row class="header-wrap" v-show="searchResult">
@@ -39,7 +41,7 @@
                 <el-table ref="multipleTable" :data="orderDatas" border tooltip-effect="dark" style="width:100%" height='400'>
                     <el-table-column type="selection" width="55">
                     </el-table-column>
-                    <el-table-column prop="orderNum" label="订单号" width="240">
+                    <el-table-column prop="orderId" label="订单号" width="240">
                         <template scope="scope">
                             <span class="orderId">{{scope.row.orderNum}}</span>
                             <el-tag close-transition class="spec-tag" v-if="scope.row.isDiscountOrder == '1'">特价</el-tag>
@@ -54,7 +56,9 @@
                     <el-table-column prop="" label="出库/发货" width="150">
                         <template scope="scope">
                             <span>{{scope.row.outStorageStatusName}}/{{scope.row.deliverStatusName}}</span>
-                            <p v-if="scope.row.deliverStatusName == '已发货'" class="deliverStatus">物流信息</p>
+                            <router-link :to="'order/orderDetail/'+scope.row.orderNum">
+                                <p v-if="scope.row.deliverStatusName == '已发货'" class="deliverStatus">物流信息</p>
+                            </router-link>
                         </template>
                     </el-table-column>
                     <el-table-column prop="dispalyStatus" label="状态" width="120" sortable>
@@ -147,7 +151,7 @@
                 </el-row>
                 <el-form-item label="订单状态" prop="checkedCities">
                     <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
-                    <el-checkbox-group v-model="form.checkedCities" @change="handleCheckedCitiesChange"  style="display:inline-block;margin-left: 10px;">
+                    <el-checkbox-group v-model="form.checkedCities" @change="handleCheckedCitiesChange" style="display:inline-block;margin-left: 10px;">
                         <el-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox>
                     </el-checkbox-group>
                 </el-form-item>
@@ -183,6 +187,7 @@
 </template>
 <script>
 import axios from 'axios'
+require('script-loader');
 export default {
     data() {
             return {
@@ -197,9 +202,9 @@ export default {
                 url: '',
                 checkAll: false,
                 checkedCities: [],
-                cities: ['待订单审核', '待财务审核', '待出库审核','待发货确认','待收货确认','已完成','已作废'],
+                cities: ['待订单审核', '待财务审核', '待出库审核', '待发货确认', '待收货确认', '已完成', '已作废'],
                 isIndeterminate: false,
-                search:true,
+                search: true,
                 searchResult: false,
                 form: {
                     orderId: '',
@@ -209,7 +214,7 @@ export default {
                     deliveryInfo: '',
                     affiliationSection: '',
                     goodsInfo: '',
-                    checkedCities:[],
+                    checkedCities: [],
                     payStatus: [],
                     orderTags: ''
                 },
@@ -294,15 +299,15 @@ export default {
                 // this.offset = (val - 1)*this.limit;
                 // this.getResturants()
             },
-            handleSearchResult(){
+            handleSearchResult() {
 
             },
-            handleSearchContinue(){
+            handleSearchContinue() {
                 this.search = true;
                 this.searchResult = false;
                 this.dialogTableVisible = true;
             },
-            handleSearchClear(){
+            handleSearchClear() {
                 this.search = true;
                 this.searchResult = false;
                 this.dialogTableVisible = false;
@@ -349,6 +354,21 @@ export default {
             advanceFormVisible() {
                 this.dialogTableVisible = true;
             },
+            export2Excel() {　　　　　　
+                require.ensure([], () => {　　　　　　　　
+                    const {                                    
+                        export_json_to_excel
+                    } = require('../../vendor/Export2Excel');　　　　　　　　
+                    const tHeader = ['订单号', '下单时间', '客户名称', '金额','状态', '付款状态','备注', '发票类型','交货日期','收货人','联系方式','收货地址'];　　　　　
+                    const filterVal = ['orderId', 'createTime', 'customerName', 'actualMoney', 'dispalyStatus','payStatus','remark','billType','deliveryDate','contact','mobile','fulladdress'];　　　　　　　　
+                    const list = this.orderDatas;　　　　　　　　
+                    const data = this.formatJson(filterVal, list);　　　　　　　　
+                    export_json_to_excel(tHeader, data, '列表excel');　　　　　　
+                })　　　　
+            },
+            formatJson(filterVal, jsonData) {　　　　　　
+                return jsonData.map(v => filterVal.map(j => v[j]))　　　　
+            },
             getOrderList(url) {
                 axios.get(url).then(response => {
                         const responseData = response.data.data;
@@ -390,7 +410,6 @@ export default {
         created() {
             this.getOrderList('/static/jsonList/orderList.json');
         }
-
 
 }
 </script>
