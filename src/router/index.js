@@ -9,6 +9,7 @@ import Client from '@/page/client/client'
 import Money from '@/page/money/money'
 import Marketing from '@/page/marketing/marketing'
 import Statement from '@/page/statement/statement'
+import CompanyInfo from '@/page/setting/companyInfo'
 
 Vue.use(Router)
 
@@ -53,6 +54,10 @@ export default new Router({
             path: 'page/statement',
             component: Statement,
             meta: ['报表', '订单统计报表']
+        }, {
+            path: 'page/setting',
+            component: CompanyInfo,
+            meta: ['设置', '公司信息']
         }]
     }]
 })

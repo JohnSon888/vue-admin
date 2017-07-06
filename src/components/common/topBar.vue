@@ -1,8 +1,8 @@
 <template>
     <nav class="header-warp clearfix">
         <div class="left-item show">
-            <img src="https://res.dinghuo123.com/dist/ydhv2/img/logo126.ce877849c5367c489c9e471a510b977e.png" alt="qia">
-            <i class="icon iconfont icon-liebiao"></i>
+            <img src="https://res.dinghuo123.com/dist/ydhv2/img/logo126.ce877849c5367c489c9e471a510b977e.png" alt="qia" v-show="imgVisible">
+            <i class="icon iconfont icon-liebiao" @click="toggleSideBar" :class="{'active':!sidebar.opened}"></i>
         </div>
         <div class="right-item right">
             <ul class="clearfix">
@@ -28,7 +28,9 @@
                     <el-menu class="el-menu-vertical-demo setting" @open="handleOpen" @close="handleClose" v-show="shezhiVisible">
                         <el-submenu index="1">
                             <template slot="title"><i class="el-icon-message"></i>基础资料</template>
-                            <el-menu-item index="1-1">公司信息</el-menu-item>
+                            <router-link to="../../page/setting">
+                                <el-menu-item index="1-1">公司信息</el-menu-item>
+                            </router-link>
                             <el-menu-item index="1-2">部门与员工</el-menu-item>
                         </el-submenu>
                         <el-submenu index="2">
@@ -59,13 +61,22 @@
     </nav>
 </template>
 <script type="text/javascript">
+import {
+    mapGetters
+} from 'vuex';
 export default {
     data() {
             return {
                 gerenVisible: false,
                 kefuVisible: false,
-                shezhiVisible: false
+                shezhiVisible: false,
+                imgVisible: true
             }
+        },
+        computed: {
+            ...mapGetters([
+                'sidebar'
+            ])
         },
         methods: {
             handleOpen(key, keyPath) {
@@ -91,7 +102,11 @@ export default {
                 } else {
                     this.shezhiVisible = false;
                 }
-            }
+            },
+            toggleSideBar() {
+                this.imgVisible = !this.imgVisible;
+                this.$store.dispatch('ToggleSideBar')
+            },
         }
 
 }
@@ -119,6 +134,7 @@ export default {
     height: 44px;
     display: inline-block;
     vertical-align: bottom;
+    margin-left: 60px;
 }
 
 .left-item {
@@ -175,5 +191,13 @@ export default {
     position: absolute;
     left: 35px;
     top: -3px;
+}
+
+.icon-liebiao {
+    transition: all 0.5s ease-in-out;
+}
+
+.icon-liebiao.active {
+    /*transition: all 0.5s ease-in-out; */  
 }
 </style>

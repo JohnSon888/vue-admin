@@ -1,7 +1,7 @@
 <template>   
     <div class="left-menu-wrap">
         <el-menu default-active="activeIndex" class="el-menu-vertical-demo"  @select="handleSelect">
-        <router-link v-for="(item,index) in dataList" :to="item.path">
+        <router-link v-for="(item,index) in dataList" :to="item.path" :key="item.path">
             <el-menu-item @mouseenter.native="mouseen(index)" @mouseleave.native='mouseou(index)'  :index="comp(index+1)" ><i :class="item.icon"></i>{{item.value}}
             <showBox :index="index" :flag="flagList[index]"></showBox>
             </el-menu-item> 
