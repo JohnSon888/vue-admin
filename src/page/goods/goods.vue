@@ -118,11 +118,25 @@ export default {
                 this.currentPage = this.page
                 this.pageSize = val;
                 this.tableDatas = this.pageDatas[this.page-1];
+                this.tableDatas.forEach(item => {
+                    if (item.status == '0') {
+                        item.status = "上架";
+                    } else {
+                        item.status = "下架";
+                    }
+                })
             },
             handleCurrentChange(val) {
                 this.num++;
                 if(this.num>1){
                     this.tableDatas = this.pageDatas[val-1];
+                    this.tableDatas.forEach(item => {
+                        if (item.status == '0') {
+                            item.status = "上架";
+                        } else {
+                            item.status = "下架";
+                        }
+                    })
                     this.page = val;
                 }
             },
