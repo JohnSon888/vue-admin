@@ -20,13 +20,13 @@
                                     </el-col>
                                 </el-row>
                                 <el-row>
-                                    <el-table ref="multipleTable" :data="orderDatas" border tooltip-effect="dark" style="width:100%" height='400' show-summary>
-                                        <el-table-column prop="productCode" label="序号" width="80">
+                                    <el-table ref="multipleTable" :data="orderDatas" border tooltip-effect="dark" fit style="width:100%" height='400' show-summary>
+                                        <el-table-column prop="productCode" label="序号" width="80"  align="center">
                                             <template scope="scope">
-                                                <span class="orderId"></span>
+                                                {{scope.$index}}
                                             </template>
                                         </el-table-column>
-                                        <el-table-column prop="productImageUrl" label="主图" width="120">
+                                        <el-table-column prop="productImageUrl" label="主图" width="120" align="center">
                                             <template scope="scope">
                                                 <img :src="scope.row.productImageUrl" style="width:80px;height:80px;vertical-align: middle;">
                                             </template>

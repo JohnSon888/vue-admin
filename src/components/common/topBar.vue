@@ -74,6 +74,10 @@ export default {
             }
         },
         computed: {
+            /*
+                当一个组件需要获取多个状态时候，将这些状态都声明为计算属性会有些重复和冗余。
+                为了解决这个问题，我们可以使用 mapState 辅助函数帮助我们生成计算属性
+             */
             ...mapGetters([
                 'sidebar'
             ])
