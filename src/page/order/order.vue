@@ -356,7 +356,7 @@ export default {
             },
             export2Excel() {　　　　　　
                 require.ensure([], () => {　　　　　　　　
-                    const {                                    
+                    const {
                         export_json_to_excel
                     } = require('../../vendor/Export2Excel');　　　　　　　　
                     const tHeader = ['订单号', '下单时间', '客户名称', '金额','状态', '付款状态','备注', '发票类型','交货日期','收货人','联系方式','收货地址'];　　　　　

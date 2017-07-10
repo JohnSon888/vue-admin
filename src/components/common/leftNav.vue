@@ -1,10 +1,10 @@
-<template>   
+<template>
     <div class="left-menu-wrap">
         <el-menu default-active="activeIndex" class="el-menu-vertical-demo"  @select="handleSelect">
         <router-link v-for="(item,index) in dataList" :to="item.path" :key="item.path">
             <el-menu-item @mouseenter.native="mouseen(index)" @mouseleave.native='mouseou(index)'  :index="comp(index+1)" ><i :class="item.icon"></i>{{item.value}}
             <showBox :index="index" :flag="flagList[index]"></showBox>
-            </el-menu-item> 
+            </el-menu-item>
         </router-link>
             <template>
                 <div class="app-center">
@@ -28,32 +28,32 @@ export default {
         return {
             dataList:[
                {
-                path:'../../page/order',
+                path:'/page/order',
                 icon:'el-icon-message',
                 value:'订单'
                },
                {
-                path:'../../page/goods',
+                path:'/page/goods',
                 icon:'el-icon-menu',
                 value:'商品'
                },
                {
-                path:'../../page/client',
+                path:'/page/client',
                 icon:'el-icon-setting',
                 value:'客户'
                },
                {
-                path:'../../page/money',
+                path:'/page/money',
                 icon:'el-icon-setting',
                 value:'资金'
                },
                {
-                path:'../../page/marketing',
+                path:'/page/marketing',
                 icon:'el-icon-setting',
                 value:'营销'
                },
                {
-                path:'../../page/statement',
+                path:'/page/statement',
                 icon:'el-icon-setting',
                 value:'报表'
                }
@@ -81,8 +81,8 @@ export default {
         comp:function(e){
             return e.toString();
         }
-        
-        
+
+
     },
     computed:{
     }
@@ -136,7 +136,7 @@ export default {
 }
 .el-menu-item:hover{
   color: #fff;
-  background-color: #03b8cc;  
+  background-color: #03b8cc;
 }
 .el-menu-item.is-active{
   color: #fff;
